@@ -1,0 +1,32 @@
+[
+  {
+    "id": "northstar-logistics",
+    "name": "Northstar Logistics",
+    "segment": "Enterprise",
+    "acv": 240000,
+    "daysToRenewal": 43,
+    "healthScore": 41,
+    "riskStatus": "High",
+    "signals": {
+      "usageTrend": -28,
+      "openTickets": 9,
+      "criticalTickets": 3,
+      "sentimentScore": 34
+    }
+  },
+  {
+    "id": "atlas-manufacturing",
+    "name": "Atlas Manufacturing",
+    "segment": "Mid-Market",
+    "acv": 120000,
+    "daysToRenewal": 180,
+    "healthScore": 82,
+    "riskStatus": "Low",
+    "signals": {
+      "usageTrend": 12,
+      "openTickets": 1,
+      "criticalTickets": 0,
+      "sentimentScore": 78
+    }
+  }
+]
