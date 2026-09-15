@@ -11,7 +11,7 @@ export function PageShell({ children }: { children: ReactNode }) {
               R
             </span>
             <span className="text-base font-semibold tracking-tight text-foreground">
-              RetainAI
+              RetAIn.ai
             </span>
           </Link>
           <nav className="flex items-center gap-6 text-sm">

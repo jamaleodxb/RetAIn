@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RetainAI — Customer Churn Risk Intelligence" },
+      { title: "RetAIn.ai — Customer Churn Risk Intelligence" },
       {
         name: "description",
         content:
-          "RetainAI helps Customer Success teams identify customers at risk of churn and investigate why.",
+          "RetAIn.ai helps Customer Success teams identify customers at risk of churn and investigate why.",
       },
-      { name: "author", content: "RetainAI" },
-      { property: "og:title", content: "RetainAI — Customer Churn Risk Intelligence" },
+      { name: "author", content: "RetAIn.ai" },
+      { property: "og:title", content: "RetAIn.ai — Customer Churn Risk Intelligence" },
       {
         property: "og:description",
         content:
-          "RetainAI helps Customer Success teams identify customers at risk of churn and investigate why.",
+          "RetAIn.ai helps Customer Success teams identify customers at risk of churn and investigate why.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
