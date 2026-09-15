@@ -14,6 +14,7 @@ import { customers, getCustomer as getMockCustomer } from "@/lib/customers";
  */
 
 const API_URL = import.meta.env["VITE_API_URL"] as string | undefined;
+console.log("API URL:", API_URL);
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
