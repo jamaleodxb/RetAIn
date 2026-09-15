@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { fetchCustomers } from "@/lib/api";
+import { Loader2, RefreshCw } from "lucide-react";
+import { getCustomers } from "@/services/api";
 import { formatCurrency } from "@/lib/customers";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/Card";
@@ -9,20 +10,22 @@ import { CustomerTable } from "@/components/CustomerTable";
 
 const customersQuery = queryOptions({
   queryKey: ["customers"],
-  queryFn: fetchCustomers,
+  queryFn: getCustomers,
 });
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(customersQuery),
+  pendingComponent: DashboardLoading,
+  errorComponent: DashboardError,
   head: () => ({
     meta: [
-      { title: "Customer Portfolio Dashboard — RetainAI" },
+      { title: "Customer Portfolio Dashboard — RetAIn.ai" },
       {
         name: "description",
         content:
           "Monitor customer health, contract value, and renewal risk across your portfolio in one dashboard.",
       },
-      { property: "og:title", content: "Customer Portfolio Dashboard — RetainAI" },
+      { property: "og:title", content: "Customer Portfolio Dashboard — RetAIn.ai" },
       {
         property: "og:description",
         content:
@@ -67,6 +70,37 @@ function Dashboard() {
       <Card title="All customers" description="Select a customer to investigate risk.">
         <CustomerTable customers={customers} />
       </Card>
+    </PageShell>
+  );
+}
+
+function DashboardLoading() {
+  return (
+    <PageShell>
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-muted-foreground">
+        <Loader2 className="h-6 w-6 animate-spin" />
+        <p className="text-sm">Loading your portfolio…</p>
+      </div>
+    </PageShell>
+  );
+}
+
+function DashboardError({ reset }: { reset: () => void }) {
+  return (
+    <PageShell>
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-center">
+        <h2 className="text-lg font-semibold text-foreground">Couldn't load customers</h2>
+        <p className="text-sm text-muted-foreground">
+          The portfolio couldn't be retrieved. Check your connection and try again.
+        </p>
+        <button
+          onClick={reset}
+          className="mt-2 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          <RefreshCw className="h-4 w-4" />
+          Try again
+        </button>
+      </div>
     </PageShell>
   );
 }
