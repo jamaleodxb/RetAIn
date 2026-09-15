@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMutation, useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { ArrowLeft, Loader2, TrendingDown, TrendingUp, TriangleAlert } from "lucide-react";
-import { fetchCustomer, investigateCustomer } from "@/lib/api";
-import { formatCurrency, type Customer } from "@/lib/customers";
+import { ArrowLeft, Loader2, RefreshCw, TrendingDown, TrendingUp, TriangleAlert } from "lucide-react";
+import { getCustomer, investigateCustomer } from "@/services/api";
+import { formatCurrency } from "@/lib/customers";
+import type { Customer } from "@/types";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/Card";
 import { Stat } from "@/components/Stat";
@@ -14,7 +15,7 @@ const customerQuery = (id: string) =>
     queryKey: ["customers", id],
     queryFn: async () => {
       try {
-        return await fetchCustomer(id);
+        return await getCustomer(id);
       } catch {
         throw notFound();
       }
@@ -24,19 +25,20 @@ const customerQuery = (id: string) =>
 export const Route = createFileRoute("/customers/$id")({
   loader: ({ context, params }) =>
     context.queryClient.ensureQueryData(customerQuery(params.id)),
+  pendingComponent: DetailLoading,
   head: ({ loaderData }) => {
     const name = loaderData?.name ?? "Customer";
     return {
       meta: [
-        { title: `${name} — Risk Investigation — RetainAI` },
+        { title: `${name} — Risk Investigation — RetAIn.ai` },
         {
           name: "description",
-          content: `Investigate churn risk signals for ${name} with RetainAI.`,
+          content: `Investigate churn risk signals for ${name} with RetAIn.ai.`,
         },
-        { property: "og:title", content: `${name} — Risk Investigation — RetainAI` },
+        { property: "og:title", content: `${name} — Risk Investigation — RetAIn.ai` },
         {
           property: "og:description",
-          content: `Investigate churn risk signals for ${name} with RetainAI.`,
+          content: `Investigate churn risk signals for ${name} with RetAIn.ai.`,
         },
       ],
     };
@@ -89,9 +91,17 @@ function CustomerDetail() {
           </p>
         )}
         {investigate.isError && (
-          <p className="mt-2 text-sm text-destructive">
-            Investigation failed. Please try again.
-          </p>
+          <div className="mt-3 flex items-center gap-3 rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            <TriangleAlert className="h-4 w-4 shrink-0" />
+            <span>Investigation failed. Please try again.</span>
+            <button
+              onClick={() => investigate.mutate()}
+              className="ml-auto inline-flex items-center gap-1.5 font-medium underline underline-offset-2"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              Retry
+            </button>
+          </div>
         )}
       </div>
 
@@ -119,17 +129,34 @@ function CustomerDetail() {
             <ul className="mt-2 space-y-2">
               {investigate.data.riskDrivers.map((driver) => (
                 <li
-                  key={driver}
+                  key={driver.id}
                   className="flex items-start gap-2 text-sm text-foreground"
                 >
-                  <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-                  {driver}
+                  <TriangleAlert
+                    className={
+                      driver.severity === "high"
+                        ? "mt-0.5 h-4 w-4 shrink-0 text-destructive"
+                        : "mt-0.5 h-4 w-4 shrink-0 text-warning"
+                    }
+                  />
+                  {driver.label}
                 </li>
               ))}
             </ul>
           </div>
         </Card>
       )}
+    </PageShell>
+  );
+}
+
+function DetailLoading() {
+  return (
+    <PageShell>
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-muted-foreground">
+        <Loader2 className="h-6 w-6 animate-spin" />
+        <p className="text-sm">Loading customer…</p>
+      </div>
     </PageShell>
   );
 }

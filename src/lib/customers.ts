@@ -1,26 +1,4 @@
-export type RiskLevel = "Low" | "Medium" | "High";
-
-export interface Customer {
-  id: string;
-  name: string;
-  segment: "Enterprise" | "Mid-Market" | "SMB";
-  acv: number;
-  daysToRenewal: number;
-  healthScore: number;
-  riskStatus: RiskLevel;
-  signals: {
-    usageTrend: number; // % change vs prior period, negative = declining
-    openTickets: number;
-    criticalTickets: number;
-    sentimentScore: number; // 0-100
-  };
-}
-
-export interface RiskAssessment {
-  riskScore: number;
-  riskLevel: RiskLevel;
-  riskDrivers: string[];
-}
+import type { Customer } from "@/types";
 
 export const customers: Customer[] = [
   {

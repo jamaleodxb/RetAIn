@@ -1,4 +1,4 @@
-import type { RiskLevel } from "@/lib/customers";
+import type { RiskLevel } from "@/types";
 import { cn } from "@/lib/utils";
 
 const styles: Record<RiskLevel, string> = {

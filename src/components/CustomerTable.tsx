@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import type { Customer } from "@/lib/customers";
+import type { Customer } from "@/types";
 import { formatCurrency } from "@/lib/customers";
 import { HealthScore } from "./HealthScore";
 import { RiskBadge } from "./RiskBadge";
