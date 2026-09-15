@@ -13,7 +13,7 @@ import { customers, getCustomer } from "./customers";
  *   POST {base}/customers/{id}/investigate
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string | undefined;
+const API_BASE_URL = import.meta.env["VITE_API_BASE_URL"] as string | undefined;
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE_URL}${path}`, {
