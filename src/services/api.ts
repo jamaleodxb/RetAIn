@@ -90,11 +90,10 @@ export async function getCustomer(id: string): Promise<Customer> {
   try {
     return await request<Customer>(`/customers/${id}`);
   } catch (err) {
-    if (API_URL && err instanceof Error && !err.message.startsWith("API request failed: 404")) {
-      await delay(150);
-      return mockCustomer(id);
-    }
-    throw err;
+    const isNotFound = err instanceof Error && err.message.startsWith("API request failed: 404");
+    if (isNotFound) throw err;
+    await delay(150);
+    return mockCustomer(id);
   }
 }
 
