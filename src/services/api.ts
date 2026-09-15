@@ -1,5 +1,5 @@
 import type { Customer, RiskAssessment, RiskDriver } from "@/types";
-import { customers, getCustomer } from "@/lib/customers";
+import { customers, getCustomer as getMockCustomer } from "@/lib/customers";
 
 /**
  * RetAIn.ai API service.
@@ -36,7 +36,7 @@ function mockCustomers(): Customer[] {
 }
 
 function mockCustomer(id: string): Customer {
-  const customer = getCustomer(id);
+  const customer = getMockCustomer(id);
   if (!customer) throw new Error(`Customer not found: ${id}`);
   return customer;
 }
