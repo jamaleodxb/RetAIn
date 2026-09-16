@@ -28,5 +28,125 @@
       "criticalTickets": 0,
       "sentimentScore": 78
     }
+  },
+  {
+    "id": "horizon-retail",
+    "name": "Horizon Retail",
+    "segment": "Enterprise",
+    "acv": 310000,
+    "daysToRenewal": 65,
+    "healthScore": 58,
+    "riskStatus": "Medium",
+    "signals": {
+      "usageTrend": -9,
+      "openTickets": 4,
+      "criticalTickets": 1,
+      "sentimentScore": 55
+    }
+  },
+  {
+    "id": "aurora-health",
+    "name": "Aurora Health",
+    "segment": "Enterprise",
+    "acv": 280000,
+    "daysToRenewal": 28,
+    "healthScore": 61,
+    "riskStatus": "Medium",
+    "signals": {
+      "usageTrend": -4,
+      "openTickets": 2,
+      "criticalTickets": 0,
+      "sentimentScore": 63
+    }
+  },
+  {
+    "id": "phoenix-energy",
+    "name": "Phoenix Energy",
+    "segment": "Enterprise",
+    "acv": 400000,
+    "daysToRenewal": 90,
+    "healthScore": 39,
+    "riskStatus": "High",
+    "signals": {
+      "usageTrend": -18,
+      "openTickets": 8,
+      "criticalTickets": 2,
+      "sentimentScore": 25
+    }
+  },
+  {
+    "id": "summit-financial",
+    "name": "Summit Financial",
+    "segment": "Enterprise",
+    "acv": 500000,
+    "daysToRenewal": 250,
+    "healthScore": 91,
+    "riskStatus": "Low",
+    "signals": {
+      "usageTrend": 14,
+      "openTickets": 0,
+      "criticalTickets": 0,
+      "sentimentScore": 88
+    }
+  },
+  {
+    "id": "delta-tech",
+    "name": "Delta Tech",
+    "segment": "Mid-Market",
+    "acv": 160000,
+    "daysToRenewal": 115,
+    "healthScore": 51,
+    "riskStatus": "Medium",
+    "signals": {
+      "usageTrend": -12,
+      "openTickets": 7,
+      "criticalTickets": 2,
+      "sentimentScore": 46
+    }
+  },
+  {
+    "id": "bluewave-telecom",
+    "name": "BlueWave Telecom",
+    "segment": "Enterprise",
+    "acv": 360000,
+    "daysToRenewal": 170,
+    "healthScore": 55,
+    "riskStatus": "Medium",
+    "signals": {
+      "usageTrend": -24,
+      "openTickets": 1,
+      "criticalTickets": 0,
+      "sentimentScore": 70
+    }
+  },
+  {
+    "id": "nova-pharma",
+    "name": "Nova Pharma",
+    "segment": "Enterprise",
+    "acv": 290000,
+    "daysToRenewal": 210,
+    "healthScore": 83,
+    "riskStatus": "Low",
+    "signals": {
+      "usageTrend": 9,
+      "openTickets": 1,
+      "criticalTickets": 0,
+      "sentimentScore": 81
+    }
+  },
+  {
+    "id": "vertex-media",
+    "name": "Vertex Media",
+    "segment": "SMB",
+    "acv": 75000,
+    "daysToRenewal": 45,
+    "healthScore": 50,
+    "riskStatus": "Medium",
+    "signals": {
+      "usageTrend": -6,
+      "openTickets": 3,
+      "criticalTickets": 0,
+      "sentimentScore": 52
+    }
   }
 ]

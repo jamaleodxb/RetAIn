@@ -28,6 +28,18 @@ export interface RiskDriver {
 
 export interface RiskAssessment {
   riskScore: number;
+
   riskLevel: RiskLevel;
+
   riskDrivers: RiskDriver[];
+
+  recommendedPlaybook: string;
+
+  recommendedActions: string[];
+
+  outreachSubject: string;
+
+  outreachBody: string;
+
+  timeline: string[];
 }

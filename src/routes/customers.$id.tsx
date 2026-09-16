@@ -122,28 +122,97 @@ function CustomerDetail() {
               </div>
             </div>
           </div>
-          <div className="mt-4">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Risk Drivers
-            </p>
-            <ul className="mt-2 space-y-2">
-              {investigate.data.riskDrivers.map((driver) => (
-                <li
-                  key={driver.id}
-                  className="flex items-start gap-2 text-sm text-foreground"
-                >
-                  <TriangleAlert
-                    className={
-                      driver.severity === "high"
-                        ? "mt-0.5 h-4 w-4 shrink-0 text-destructive"
-                        : "mt-0.5 h-4 w-4 shrink-0 text-warning"
-                    }
-                  />
-                  {driver.label}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-4">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Risk Drivers
+  </p>
+
+  <ul className="mt-2 space-y-2">
+    {investigate.data.riskDrivers.map((driver) => (
+      <li
+        key={driver.id}
+        className="flex items-start gap-2 text-sm text-foreground"
+      >
+        <TriangleAlert
+          className={
+            driver.severity === "high"
+              ? "mt-0.5 h-4 w-4 shrink-0 text-destructive"
+              : "mt-0.5 h-4 w-4 shrink-0 text-warning"
+          }
+        />
+        {driver.label}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<div className="mt-6 rounded-lg border border-border bg-background p-4">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Recommended Playbook
+  </p>
+
+  <p className="mt-2 text-base font-semibold">
+    {investigate.data.recommendedPlaybook}
+  </p>
+</div>
+
+<div className="mt-6">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Recommended Actions
+  </p>
+
+  <ul className="mt-3 space-y-2">
+    {investigate.data.recommendedActions.map((action, index) => (
+      <li
+        key={index}
+        className="flex items-start gap-2 text-sm text-foreground"
+      >
+        <span className="text-success">✓</span>
+        {action}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<div className="mt-6 rounded-lg border border-border bg-background p-4">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Outreach Draft
+  </p>
+
+  <p className="mt-3 font-semibold">
+    Subject:
+  </p>
+
+  <p className="text-sm">
+    {investigate.data.outreachSubject}
+  </p>
+
+  <p className="mt-4 font-semibold">
+    Body:
+  </p>
+
+  <pre className="mt-2 whitespace-pre-wrap text-sm text-foreground">
+    {investigate.data.outreachBody}
+  </pre>
+</div>
+
+<div className="mt-6">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Agent Timeline
+  </p>
+
+  <ul className="mt-3 space-y-2">
+    {investigate.data.timeline.map((step, index) => (
+      <li
+        key={index}
+        className="flex items-start gap-2 text-sm text-foreground"
+      >
+        <span className="text-success">✓</span>
+        {step}
+      </li>
+    ))}
+  </ul>
+</div>
         </Card>
       )}
     </PageShell>

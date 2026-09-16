@@ -1,3 +1,4 @@
+from agent.investigate import investigate
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
@@ -52,39 +53,4 @@ def get_customer(customer_id: str):
 
 @app.post("/customers/{customer_id}/investigate")
 def investigate_customer(customer_id: str):
-    customers = load_customers()
-
-    customer = None
-
-    for c in customers:
-        if c["id"] == customer_id:
-            customer = c
-            break
-
-    if not customer:
-        raise HTTPException(
-            status_code=404,
-            detail="Customer not found"
-        )
-
-    return {
-        "riskScore": 82,
-        "riskLevel": "High",
-        "riskDrivers": [
-            {
-                "id": "usage",
-                "label": "Product usage declining",
-                "severity": "high"
-            },
-            {
-                "id": "tickets",
-                "label": "Open critical support tickets",
-                "severity": "high"
-            },
-            {
-                "id": "renewal",
-                "label": "Upcoming renewal",
-                "severity": "medium"
-            }
-        ]
-    }
+    return investigate(customer_id)
