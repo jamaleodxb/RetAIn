@@ -226,3 +226,19 @@ def generate_email(customer, playbook_name):
             "Customer Success Team"
         )
     }
+
+def generate_timeline(
+    customer,
+    score,
+    playbook
+):
+
+    return [
+        f"Retrieved customer profile for {customer['name']}",
+        f"Analysed usage trend ({customer['signals']['usageTrend']}%)",
+        f"Reviewed {customer['signals']['criticalTickets']} critical support ticket(s)",
+        f"Reviewed {customer['signals']['openTickets']} active support ticket(s)",
+        f"Calculated risk score {score}",
+        f"Selected {playbook['playbook']} playbook",
+        "Generated customer outreach draft"
+    ]

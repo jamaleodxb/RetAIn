@@ -28,9 +28,7 @@ export interface RiskDriver {
 
 export interface RiskAssessment {
   riskScore: number;
-
   riskLevel: RiskLevel;
-
   riskDrivers: RiskDriver[];
 
   recommendedPlaybook: string;
@@ -42,4 +40,6 @@ export interface RiskAssessment {
   outreachBody: string;
 
   timeline: string[];
+
+  approvalStatus?: "Pending" | "Approved" | "Rejected";
 }

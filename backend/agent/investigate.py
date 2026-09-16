@@ -3,46 +3,56 @@ from agent.tools import (
     calculate_risk,
     select_playbook,
     generate_email,
+    generate_timeline,
 )
+
 
 def investigate(customer_id: str):
 
     customer = get_customer_profile(customer_id)
+
+    if customer is None:
+        raise ValueError(
+            f"Customer {customer_id} not found"
+        )
 
     score, level, drivers = calculate_risk(customer)
 
     playbook = select_playbook(customer)
 
     email = generate_email(
-    customer,
-    playbook["playbook"]
-)
+        customer,
+        playbook["playbook"]
+    )
+
+    timeline = generate_timeline(
+        customer,
+        score,
+        playbook
+    )
 
     return {
-    "riskScore": score,
+        "riskScore": score,
 
-    "riskLevel": level,
+        "riskLevel": level,
 
-    "riskDrivers": drivers,
+        "riskDrivers": drivers,
 
-   "recommendedPlaybook":
-    playbook["playbook"],
+        "recommendedPlaybook":
+            playbook["playbook"],
 
-"recommendedActions":
-    playbook["actions"],
+        "recommendedActions":
+            playbook["actions"],
 
-    "outreachSubject":
-    email["subject"],
+        "outreachSubject":
+            email["subject"],
 
-"outreachBody":
-    email["body"],
+        "outreachBody":
+            email["body"],
 
-    "timeline": [
-        "Retrieved customer profile",
-        "Analysed usage metrics",
-        "Reviewed support activity",
-        "Calculated churn risk",
-        "Selected retention playbook",
-        "Prepared outreach draft"
-    ]
-}
+        "approvalStatus":
+            "Pending",
+
+        "timeline":
+            timeline
+    }

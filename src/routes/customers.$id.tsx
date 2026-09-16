@@ -9,6 +9,8 @@ import { Card } from "@/components/Card";
 import { Stat } from "@/components/Stat";
 import { RiskBadge } from "@/components/RiskBadge";
 import { HealthScore } from "@/components/HealthScore";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const customerQuery = (id: string) =>
   queryOptions({
@@ -50,9 +52,21 @@ function CustomerDetail() {
   const { id } = Route.useParams();
   const { data: customer } = useSuspenseQuery(customerQuery(id));
 
+  const [approvalStatus, setApprovalStatus] = useState<
+  "Pending" | "Approved" | "Rejected"
+  >("Pending");
+
   const investigate = useMutation({
     mutationFn: () => investigateCustomer(customer.id),
   });
+
+  useEffect(() => {
+  if (investigate.data?.approvalStatus) {
+    setApprovalStatus(
+      investigate.data.approvalStatus
+    );
+  }
+}, [investigate.data]);
 
   return (
     <PageShell>
@@ -212,6 +226,32 @@ function CustomerDetail() {
       </li>
     ))}
   </ul>
+</div>
+
+<div className="mt-6 rounded-lg border border-border bg-background p-4">
+  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    Approval Status
+  </p>
+
+<p className="mt-2 font-semibold">
+  {approvalStatus}
+</p>
+
+<div className="mt-4 flex gap-3">
+  <button
+    onClick={() => setApprovalStatus("Approved")}
+    className="rounded bg-green-600 px-4 py-2 text-white"
+  >
+    Approve
+  </button>
+
+  <button
+    onClick={() => setApprovalStatus("Rejected")}
+    className="rounded bg-red-600 px-4 py-2 text-white"
+  >
+    Reject
+  </button>
+</div>
 </div>
         </Card>
       )}
